@@ -12,6 +12,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.wisteria.core.app.ModuleConstants;
 
+/**
+ * 
+ * @author HuaShengPi
+ *
+ */
 @Configuration
 @AutoConfigureAfter(MybatisConfiguration.class)
 public class MybatisConfiguration implements EnvironmentAware {

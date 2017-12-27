@@ -1,13 +1,12 @@
 package org.wisteria.web.mvc.base;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
+import org.wisteria.web.mvc.model.PageResult;
 
 public interface IBaseService<T> {
 
 	int add(T record);
-	List<T> query(T record);
+	PageResult<T> queryByPage(T record, int pageNum, int pageSize);
 	int modify(T record);
 	T get(@Param("id") Integer id);
 	int remove(@Param("id") Integer id);

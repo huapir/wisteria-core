@@ -1,6 +1,9 @@
 package org.wisteria.web.mvc.base;
 
-import java.util.List;
+import org.wisteria.web.mvc.model.PageResult;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 
 public abstract class AbstractBaseServiceImpl<T> implements IBaseService<T> {
 	
@@ -10,8 +13,11 @@ public abstract class AbstractBaseServiceImpl<T> implements IBaseService<T> {
 		return getBaseMapper().insert(record);
 	}
 
-	public List<T> query(T record) {
-		return getBaseMapper().selectList(record);
+	@Override
+	public PageResult<T> queryByPage(T record, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		Page<T> page = getBaseMapper().selectByPage(record);
+		return new PageResult<T>(page.getTotal(), page.getResult());
 	}
 
 	public int modify(T record) {
