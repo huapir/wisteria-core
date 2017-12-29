@@ -4,11 +4,14 @@ import org.apache.ibatis.annotations.Param;
 
 import com.github.pagehelper.Page;
 
-public interface BaseMapper<T> {
+public interface BaseMapper<T, I> {
 
 	int insert(T record);
-	Page<T> selectByPage(T record);
+	
 	int update(T record);
-	T select(@Param("id") Integer id);
-	int delete(@Param("id") Integer id);
+	
+	T select(@Param("id") I id);
+	Page<T> selectByPage(T record);
+	
+	int deleteBatchIds(@SuppressWarnings("unchecked") @Param("ids") I... ids);
 }

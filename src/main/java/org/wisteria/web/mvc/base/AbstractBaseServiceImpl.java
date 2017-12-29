@@ -5,12 +5,18 @@ import org.wisteria.web.mvc.model.PageResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
-public abstract class AbstractBaseServiceImpl<T> implements IBaseService<T> {
+public abstract class AbstractBaseServiceImpl<T, I> implements IBaseService<T, I> {
 	
-	public abstract BaseMapper<T> getBaseMapper();
+	public abstract BaseMapper<T, I> getBaseMapper();
 
-	public int add(T record) {
-		return getBaseMapper().insert(record);
+	@Override
+	public boolean add(T record) {
+		return getBaseMapper().insert(record) > 0;
+	}
+	
+	@Override
+	public T query(I id) {
+		return getBaseMapper().select(id);
 	}
 
 	@Override
@@ -20,16 +26,15 @@ public abstract class AbstractBaseServiceImpl<T> implements IBaseService<T> {
 		return new PageResult<T>(page.getTotal(), page.getResult());
 	}
 
-	public int modify(T record) {
-		return getBaseMapper().update(record);
+	@Override
+	public boolean modify(T record) {
+		return getBaseMapper().update(record) > 0;
 	}
 
-	public T get(Integer id) {
-		return getBaseMapper().select(id);
-	}
-
-	public int remove(Integer id) {
-		return getBaseMapper().delete(id);
+	@Override
+	@SuppressWarnings("unchecked")
+	public boolean remove(I... id) {
+		return getBaseMapper().deleteBatchIds(id) > 0;
 	}
 
 }

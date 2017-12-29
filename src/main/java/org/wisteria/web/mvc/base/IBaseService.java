@@ -1,13 +1,16 @@
 package org.wisteria.web.mvc.base;
 
-import org.apache.ibatis.annotations.Param;
 import org.wisteria.web.mvc.model.PageResult;
 
-public interface IBaseService<T> {
+public interface IBaseService<T, I> {
 
-	int add(T record);
+	boolean add(T record);
+	
+	T query(I id);
 	PageResult<T> queryByPage(T record, int pageNum, int pageSize);
-	int modify(T record);
-	T get(@Param("id") Integer id);
-	int remove(@Param("id") Integer id);
+	
+	boolean modify(T record);
+	
+	@SuppressWarnings("unchecked")
+	boolean remove(I... id);
 }
