@@ -14,4 +14,6 @@ public interface BaseMapper<T, I> {
 	Page<T> selectByPage(T record);
 	
 	int deleteBatchIds(@SuppressWarnings("unchecked") @Param("ids") I... ids);
+	
+	Page<?> selectByPages(T record);
 }

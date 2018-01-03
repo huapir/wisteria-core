@@ -37,4 +37,11 @@ public abstract class AbstractBaseServiceImpl<T, I> implements IBaseService<T, I
 		return getBaseMapper().deleteBatchIds(id) > 0;
 	}
 
+	@Override
+	public PageResult<?> queryByPages(T record, int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		Page<?> page = getBaseMapper().selectByPages(record);
+		return new PageResult(page.getTotal(), page.getResult());
+	}
+
 }

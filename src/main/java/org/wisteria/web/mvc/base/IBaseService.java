@@ -13,4 +13,6 @@ public interface IBaseService<T, I> {
 	
 	@SuppressWarnings("unchecked")
 	boolean remove(I... id);
+	
+	PageResult<?> queryByPages(T record, int pageNum, int pageSize);
 }
