@@ -2,17 +2,16 @@ package org.wisteria.web.mvc.base;
 
 import org.wisteria.web.mvc.model.PageResult;
 
-public interface IBaseService<T, I> {
+public interface IBaseService<P, M, V> {
 
-	boolean add(T record);
+	boolean add(M record);
 	
-	T query(I id);
-	PageResult<T> queryByPage(T record, int pageNum, int pageSize);
+	V query(P id);
+	PageResult<V> queryByPage(M record, int pageIndex, int pageSize);
 	
-	boolean modify(T record);
+	boolean modify(M record);
 	
 	@SuppressWarnings("unchecked")
-	boolean remove(I... id);
+	boolean remove(P... id);
 	
-	PageResult<?> queryByPages(T record, int pageNum, int pageSize);
 }

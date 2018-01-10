@@ -94,6 +94,12 @@
 		    <version>2.7.0</version>
 		</dependency>
 		
+		<!-- ehcache -->
+		<dependency>
+		    <groupId>net.sf.ehcache</groupId>
+		    <artifactId>ehcache</artifactId>
+		    <version>2.10.4</version>
+		</dependency>
 	    
 	</dependencies>
 
@@ -136,6 +142,18 @@
 					<skip>${skipTests}</skip>
 				</configuration>
 			</plugin>
+			<plugin>  
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-maven-plugin</artifactId>  
+                <dependencies>  
+                    <!-- spring热部署 -->  
+                    <dependency>  
+                        <groupId>org.springframework</groupId>  
+                        <artifactId>springloaded</artifactId>  
+                        <version>1.2.6.RELEASE</version>  
+                    </dependency>  
+                </dependencies>  
+            </plugin>
 			
 			<!--
 			<plugin>
